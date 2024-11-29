@@ -1,38 +1,29 @@
-.App {
-  text-align: center;
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
+  color: rgba(202, 191, 191, 0.742); /* Change arrow color to white */
+  transition: color 0.3s ease; /* Add smooth transition for hover */
+  font-size: 1.2em;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.mySwiper .swiper-button-next::after,
+.mySwiper .swiper-button-prev::after {
+  font-size: 1.2em; /* Changes the arrow icon size */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.mySwiper .swiper-button-next:hover,
+.mySwiper .swiper-button-prev:hover {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* 
+#F1E5D1
+#DBB5B5
+#C39898
+#987070 */
