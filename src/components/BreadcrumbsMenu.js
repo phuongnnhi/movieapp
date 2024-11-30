@@ -7,9 +7,9 @@ const BreadcumbsMenu =({path, currentLabel, resetFilters}) => {
     const navigate = useNavigate();
     const handleHomeClick = () => {
         if (resetFilters) {
-          resetFilters(); // Call reset function if provided
+          resetFilters(); // Call reset function
         }
-        navigate(path || "/"); // Navigate to the home or provided path
+        navigate(path || "/"); 
       };
 
 return (

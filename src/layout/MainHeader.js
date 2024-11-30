@@ -89,7 +89,11 @@ export default function MovieAppBar() {
           </Search>
           </form>
           <Box sx={{ flexGrow: 1 }} />
-          <Typography sx={{fontSize: "1.3em", color:"#373A40", cursor: "pointer", padding: "10px"}}
+          <Typography sx={{ color:"#373A40", cursor: "pointer", padding: "10px", fontSize: {
+              xs: '0.9rem', // Smaller font size for extra-small screens
+              sm: '1rem',   // Normal size for small screens
+              md: '1.1rem', // Larger size for medium and larger screens
+            }}}
   color="inherit"
   onClick={() => navigate("/favorites")}
 >

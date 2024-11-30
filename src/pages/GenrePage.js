@@ -57,7 +57,7 @@ const GenrePage = () => {
   return (
     <Box sx={{ padding: 5 }}>
     <BreadcumbsMenu path="/" currentLabel={genre} resetFilters={resetFilters}/>
-      <Grid container spacing={3}>
+      <Grid container spacing={1}>
         {filteredMovies.map((movie) => (
           <Grid key={movie.id} item xs={6} sm={4} lg={3} xl={2}>
             <MovieCard movie={movie} />

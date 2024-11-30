@@ -44,8 +44,8 @@ const FeaturedMovies = () => {
         breakpoints={{
           375: { slidesPerView: 1, spaceBetween: 3},
             646: { slidesPerView: 2, spaceBetween: 3},
-            894: { slidesPerView: 3, spaceBetween: 3}, // Medium devices
-            1024: { slidesPerView: 4, spaceBetween: 2 }, // Larger screens
+            894: { slidesPerView: 3, spaceBetween: 3},
+            1024: { slidesPerView: 4, spaceBetween: 2 },
             1440: { slidesPerView: 6, spaceBetween: 3 }
           }}
         modules={[Navigation]}

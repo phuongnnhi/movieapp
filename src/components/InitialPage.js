@@ -36,7 +36,7 @@ const InitialPage = () => {
       <Typography variant="h4" sx={{ marginBottom: "20px", color: "#DBB5B5" }}>
         Trending
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={1}>
         {trendingMovies.map((movie) => (
           <Grid key={movie.id} item xs={6} sm={4} lg={3} xl={2}>
             <MovieCard movie={movie} />

@@ -6,14 +6,14 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "#C39898", // Footer background color
-        color: "#F1E5D1", // Footer text color
-        padding: "20px 0", // Padding for the footer
+        backgroundColor: "#C39898", 
+        color: "#F1E5D1", 
+        padding: "20px", 
         marginTop: "auto", // Push footer to the bottom of the page
       }}
     >
       <Container maxWidth="lg">
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           {/* Column 1 */}
           <Grid item xs={12} sm={6}>
             <Typography variant="h6" gutterBottom>

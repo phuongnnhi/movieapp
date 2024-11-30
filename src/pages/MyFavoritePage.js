@@ -43,9 +43,9 @@ const MyFavoritePage = () => {
       {loading ? (
         <Typography>Loading...</Typography>
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           {favorites.map((movie) => (
-            <Grid key={movie.id} item xs={6} sm={4} lg={3}>
+            <Grid key={movie.id} item xs={6} sm={4} lg={3} xl={2}>
               <MovieCard
               key={movie.id}
               movie={{ ...movie, is_favorite: true }}

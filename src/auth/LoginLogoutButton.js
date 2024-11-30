@@ -35,29 +35,39 @@ const LoginLogoutButton = () => {
         {!isLoggedIn ? (
             <Typography onClick={handleLogin}
             sx={{
-                backgroundColor: theme.palette.secondary.main, // Use secondary color for background
-                color: theme.palette.primary.main, // Use primary color for text
+                backgroundColor: theme.palette.secondary.main, 
+                color: theme.palette.primary.main, 
                 '&:hover': {
-                  backgroundColor: theme.palette.secondary.light, // Slightly lighter background on hover
+                  backgroundColor: theme.palette.secondary.light, 
                 },
                 fontWeight: "bold",
                 padding: "8px 16px",
                 borderRadius: "8px",
-                cursor: "pointer"
+                cursor: "pointer",
+                fontSize: {
+                  xs: '0.8rem', 
+                  sm: '1rem',   
+                  md: '1.1rem', 
+                }
               }}>
       Log in
     </Typography>) :(
       <Typography onClick={handleLogout}
       sx={{
-          backgroundColor: theme.palette.secondary.main, // Use secondary color for background
-          color: theme.palette.primary.main, // Use primary color for text
+          backgroundColor: theme.palette.secondary.main, 
+          color: theme.palette.primary.main, 
           '&:hover': {
-            backgroundColor: theme.palette.secondary.light, // Slightly lighter background on hover
+            backgroundColor: theme.palette.secondary.light, 
           },
           fontWeight: "bold",
           padding: "8px 16px",
           borderRadius: "8px",
-          cursor: "pointer"
+          cursor: "pointer",
+          fontSize: {
+            xs: '0.8rem', 
+            sm: '1rem',   
+            md: '1.1rem', 
+          }
         }}>
 Log out
 </Typography>)
