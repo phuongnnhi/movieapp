@@ -14,7 +14,7 @@ export const getRequestToken = async () => {
 
 // Step 2: Redirect user to authorize token
 export const redirectToAuthPage = (requestToken) => {
-  const redirectUrl = encodeURIComponent(`"${window.location.origin}/auth/callback`);
+  const redirectUrl = encodeURIComponent(`${window.location.origin}/auth/callback`);
   const authUrl = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${redirectUrl}`;
   window.location.href = authUrl;
 };
