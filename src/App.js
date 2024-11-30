@@ -7,38 +7,19 @@ import InitialPage from './components/InitialPage';
 import GenrePage from './pages/GenrePage';
 import SearchResultsPage from './components/MovieSearchPage';
 import MyFavoritePage from './pages/MyFavoritePage';
-import { getRequestToken, redirectToAuthPage } from './auth/authFunction';
 import AuthCallback from './auth/AuthCallback';
 import { AuthProvider } from './context/AuthContext';
 import { FilterProvider } from './context/FilterContext';
+import { FavoriteMoviesProvider } from './context/FavoriteContext';
 
 function App() {
 
-  useEffect(() => {
-    const initializeAuth = async () => {
-      try {
-        // Check if the current route is the callback route
-        const currentPath = window.location.pathname;
-        if (currentPath === '/auth/callback') return;
-
-        // Check if the session ID exists
-        const sessionId = localStorage.getItem("session_id");
-        const accountId = localStorage.getItem("account_id");
-        if (!sessionId) {
-          const requestToken = await getRequestToken();
-          redirectToAuthPage(requestToken);
-        }
-      } catch (error) {
-        console.error("Failed to initialize authentication:", error);
-      }
-    };
-    initializeAuth();
-  }, []);
   return (
     <AuthProvider>
       
     <Router>
     <FilterProvider>
+    <FavoriteMoviesProvider>
       <Routes>
       <Route path="/" element={<HomePage  />}>
         <Route index element={<InitialPage />} />
@@ -52,6 +33,7 @@ function App() {
         <Route path="*" element={<div>Page Not Found</div>} />
       </Route>
     </Routes>
+    </FavoriteMoviesProvider>
     </FilterProvider>
     </Router> 
     </AuthProvider>

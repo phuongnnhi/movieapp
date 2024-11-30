@@ -1,6 +1,7 @@
 import axios from "axios";
 import { BASE_URL, API_KEY } from "./config";
 
+//create custom axios instance
 const apiService = axios.create({
   baseURL: BASE_URL,
   params: {

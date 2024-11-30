@@ -4,7 +4,7 @@ import { getAccountDetails, getSessionId } from "./authFunction";
 import { AuthContext } from "../context/AuthContext";
 
 const AuthCallback = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams(); //retrieve parameters from the URL
   const navigate = useNavigate();
   const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
 
@@ -23,7 +23,7 @@ const AuthCallback = () => {
 
           console.log("Session ID:", sessionId);
           setIsLoggedIn(true);
-          navigate("/"); // Redirect to the homepage or your desired route
+          navigate("/"); // Redirect to the homepage
         } catch (error) {
           console.error("Failed to complete authentication:", error);
         }
