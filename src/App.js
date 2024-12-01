@@ -10,7 +10,7 @@ import MyFavoritePage from './pages/MyFavoritePage';
 import AuthCallback from './auth/AuthCallback';
 import { AuthProvider } from './context/AuthContext';
 import { FilterProvider } from './context/FilterContext';
-import { FavoriteMoviesProvider } from './context/FavoriteContext';
+// import { FavoriteMoviesProvider } from './context/FavoriteContext';
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
       
     <Router>
     <FilterProvider>
-    <FavoriteMoviesProvider>
+
       <Routes>
       <Route path="/" element={<HomePage  />}>
         <Route index element={<InitialPage />} />
@@ -33,7 +33,7 @@ function App() {
         <Route path="*" element={<div>Page Not Found</div>} />
       </Route>
     </Routes>
-    </FavoriteMoviesProvider>
+
     </FilterProvider>
     </Router> 
     </AuthProvider>

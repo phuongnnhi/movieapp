@@ -48,7 +48,7 @@ const InitialPage = () => {
       <Typography variant="h4" sx={{ marginTop: "40px", marginBottom: "20px", color: "#DBB5B5" }}>
         Now Playing
       </Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={1}>
         {nowPlaying.map((movie) => (
           <Grid key={movie.id} item xs={6} sm={4} lg={3} xl={2}>
             <MovieCard movie={movie} />
@@ -57,10 +57,10 @@ const InitialPage = () => {
       </Grid>
       <Box sx={{display: "flex", justifyContent: "center"}}>
       <Button onClick={() => navigate('/genre/all')} sx={{
-          backgroundColor: theme.palette.primary.main, // Use secondary color for background
-          color: theme.palette.secondary.main, // Use primary color for text
+          backgroundColor: theme.palette.primary.main, 
+          color: theme.palette.secondary.main, 
           '&:hover': {
-            backgroundColor: theme.palette.primary.light, // Slightly lighter background on hover
+            backgroundColor: theme.palette.primary.light, 
           },
           justifySelf: "center",
           marginTop: "25px",
