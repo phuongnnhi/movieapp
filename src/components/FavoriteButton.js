@@ -9,7 +9,7 @@ const FavoriteButton = ({ movieId, isFavorite: initialFavorite, onFavoriteToggle
     const [isFavorite, setIsFavorite] = useState(initialFavorite);
     const [loading, setLoading] = useState();
 
-
+    //when ever the button is clicked, update the movie to endpoint API
     const handleFavoriteToggle = async () => {
         const sessionId = localStorage.getItem("session_id");
         const accountId = localStorage.getItem("account_id");
@@ -25,9 +25,11 @@ const FavoriteButton = ({ movieId, isFavorite: initialFavorite, onFavoriteToggle
           return;
       }
         setLoading(true);
+        //the new favorite status when the button is clicked is the revert from the current status (true=>false)
         try {
             await updateFavoriteMovie(accountId, sessionId, movieId, !isFavorite);
             setIsFavorite(!isFavorite)
+            //announce to movie card to update the state of the movie and announce to my fav page
             if (onFavoriteToggle) onFavoriteToggle(movieId, !isFavorite);
         } catch (error) {
             console.error("Fail to set favorite status:", error)

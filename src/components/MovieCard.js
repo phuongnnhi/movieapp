@@ -9,6 +9,8 @@ import FavoriteButton from './FavoriteButton';
 
 export default function MovieCard({movie, accountId, sessionId, onFavoriteUpdate}) {
   const navigate = useNavigate();
+
+  //if the button is clicked, call the parent (my favorite page) to add/remove new favorite movie to the page
   const onFavoriteToggle = (movieId, isFavorite) => {
     if (onFavoriteUpdate) {
       onFavoriteUpdate(movieId, isFavorite); 
@@ -61,7 +63,8 @@ export default function MovieCard({movie, accountId, sessionId, onFavoriteUpdate
           sessionId={sessionId}
           movieId={movie.id}
           isFavorite={movie.is_favorite || false}
-          onFavoriteToggle={onFavoriteToggle} />
+          onFavoriteToggle={onFavoriteToggle} /> 
+          {/* deliver the prop to button */}
         </div>
       </CardActions>
     </Card>
