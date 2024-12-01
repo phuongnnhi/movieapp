@@ -3,6 +3,7 @@ import { updateFavoriteMovie } from "../app/apiFunctions";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState } from "react";
+import { getRequestToken, redirectToAuthPage } from "../auth/authFunction";
 
 const FavoriteButton = ({ movieId, isFavorite: initialFavorite, onFavoriteToggle, variant}) => {
     const [isFavorite, setIsFavorite] = useState(initialFavorite);
