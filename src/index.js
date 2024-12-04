@@ -4,8 +4,6 @@ import App from './App';
 import { ThemeProvider } from './context/ThemeProvider';
 
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <ThemeProvider>

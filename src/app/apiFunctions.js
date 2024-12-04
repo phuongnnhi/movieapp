@@ -73,5 +73,8 @@ try {
     )
 } catch (error) {
   console.error("Fail to update favorite movie:", error)
+  if (error.response && error.response.status === 404) {
+    alert("The movie you are trying to update is unavailable in the database.");
+  }
 }
 }

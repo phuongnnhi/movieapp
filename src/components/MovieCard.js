@@ -12,7 +12,6 @@ import { AuthContext } from '../context/AuthContext';
 export default function MovieCard({movie, onFavoriteToggle}) {
   const navigate = useNavigate();
   const {sessionId, accountId} = React.useContext(AuthContext)
-
   const [isFavorite, setIsFavorite] = React.useState(() => {
     try {
       const favorites = new Set(JSON.parse(localStorage.getItem("favorites")) || []);
@@ -40,6 +39,8 @@ export default function MovieCard({movie, onFavoriteToggle}) {
       console.error("Fail to toggle fav status:", error)
     }
   }
+
+  
 
   return (
     <Card className='movie-card' onClick={() => navigate(`/movie/${movie.id}`)}>

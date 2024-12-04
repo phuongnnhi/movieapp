@@ -9,7 +9,8 @@ import { updateFavorites } from "../helpers/favorites/fetchFavorites";
 const FavoriteButton = ({ movieId, isFavorite: initialFavorite, onFavoriteToggle, variant}) => {
     const [isFavorite, setIsFavorite] = useState(initialFavorite);
     const [loading, setLoading] = useState();
-    const {sessionId, accountId} = useContext(AuthContext)
+    const {sessionId, accountId} = useContext(AuthContext);
+  
 
     //when ever the button is clicked, update the movie to endpoint API
     const handleFavoriteToggle = async () => {
@@ -29,11 +30,14 @@ const FavoriteButton = ({ movieId, isFavorite: initialFavorite, onFavoriteToggle
           setIsFavorite(!isFavorite);
           if (onFavoriteToggle) onFavoriteToggle(movieId, !isFavorite);
       } catch (error) {
-          console.error("Failed to update favorite status:", error);
+        if (error.message) {
+          alert(error.message); // Only show the specific error message
+        }
       } finally {
           setLoading(false);
       }
   };
+
     if (variant === "icon") {
         // Icon Button for cards or compact use
         return (
