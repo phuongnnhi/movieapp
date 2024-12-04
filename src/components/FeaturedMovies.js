@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react"; // Import Swiper for carousel
 import "swiper/css"; // Import Swiper styles
-import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { fetchFeaturedMovies } from "../app/apiFunctions";
 import { Navigation } from 'swiper/modules';
 import FavoriteButton from "./FavoriteButton";
+import { updateFavorites } from "../helpers/favorites/fetchFavorites";
 
 const FeaturedMovies = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [favorites, setFavorites] = useState(new Set());
+
+  const sessionId = localStorage.getItem('session_id');
+  const accountId = localStorage.getItem('account_id');
 
   // Fetch popular movies
   useEffect(() => {
@@ -25,8 +29,40 @@ const FeaturedMovies = () => {
       }
     };
 
+    // Load favorites from local storage
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(new Set(storedFavorites));
+
     loadFeaturedMovies();
   }, []);
+
+  // Handle favorite status toggle for selected movie
+  const handleFavoriteToggle = async () => {
+    if (!selectedMovie || !accountId || !sessionId) {
+      console.error("Missing selectedMovie, accountId, or sessionId", { selectedMovie, accountId, sessionId });
+      return;
+    }
+  
+    const movieId = selectedMovie.id;
+    const newFavoriteStatus = !favorites.has(movieId);
+  
+    try {
+      await updateFavorites(accountId, sessionId, movieId, newFavoriteStatus);
+  
+      // Update local state with the updated favorites set
+      setFavorites((prevFavorites) => {
+        const updatedFavorites = new Set(prevFavorites);
+        if (newFavoriteStatus) {
+          updatedFavorites.add(movieId);
+        } else {
+          updatedFavorites.delete(movieId);
+        }
+        return updatedFavorites;
+      });
+    } catch (error) {
+      console.error("Failed to toggle favorite status:", error);
+    }
+  };
 
   return (
     <Box sx={{ background: "#000", color: "#fff", padding: "20px" }}>
@@ -117,7 +153,8 @@ const FeaturedMovies = () => {
               </Button>
               <FavoriteButton
                 movieId={selectedMovie.id}
-                isFavorite={selectedMovie.is_favorite || false}
+                onFavoriteToggle={handleFavoriteToggle}
+                isFavorite={favorites.has(selectedMovie.id)}
                 variant="outlined"
               />
             </Box>

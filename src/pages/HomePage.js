@@ -1,4 +1,4 @@
-import { Box, Container, Stack} from "@mui/material";
+import { Box, Container} from "@mui/material";
 import FeaturedMovies from "../components/FeaturedMovies";
 import React, { useContext, useEffect, useState } from "react";
 import MovieAppBar from "../layout/MainHeader";
@@ -48,7 +48,7 @@ function HomePage() {
 
         <MovieAppBar />
         {location.pathname === "/" && <FeaturedMovies />}
-        {location.pathname !== "/favorites" && <FilterAndSort/>}
+        {location.pathname !== "/favorites" && location.pathname !== "/" && <FilterAndSort/>}
  
       <Box sx={{flexGrow:"1", display: "flex",
     flexDirection: "column", justifyContent: "flex-start"}}>

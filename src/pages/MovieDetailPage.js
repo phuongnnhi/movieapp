@@ -4,29 +4,48 @@ import { fetchMovieDetails } from "../app/apiFunctions";
 import { Box, Button, Card, CardContent, CardMedia, Chip, Typography} from "@mui/material";
 import BreadcumbsMenu from "../components/BreadcrumbsMenu";
 import FavoriteButton from "../components/FavoriteButton";
+import { updateFavorites } from "../helpers/favorites/fetchFavorites";
 
 
-const MovieDetailPage = ({accountId, sessionId, onFavoriteUpdate}) => {
+const MovieDetailPage = () => {
     const {id} = useParams();
     const [movie, setMovie] = useState(null);
-
+    const [isFavorite, setIsFavorite] = useState(false);
+    const sessionId = localStorage.getItem('session_id');
+const accountId = localStorage.getItem('account_id');
 
     useEffect(() => {
-        const loadMovieDetails = async () =>{
+      const loadMovieDetails = async () => {
         try {
-            const response = await fetchMovieDetails(id); //fetch movie details by ID
-            setMovie(response.data)
-
+          const response = await fetchMovieDetails(id);
+          setMovie(response.data);
+    
+          // Check if the movie is in favorites
+          const favorites = new Set(JSON.parse(localStorage.getItem("favorites")) || []);
+          setIsFavorite(favorites.has(response.data.id));
         } catch (error) {
-            console.error("Fail to fetch movie details:", error)          
+          console.error("Failed to fetch movie details:", error);
         }
-    };
-    loadMovieDetails();
-    }, [id]
-);
+      };
+      loadMovieDetails();
+    }, [id]);
     if (!movie) {
         return <Typography>Loading...</Typography>
     }
+
+    const handleFavoriteToggle = async () => {
+      const newFavoriteStatus = !isFavorite;
+      if (!accountId || !sessionId) {
+        console.error("Missing accountId or sessionId", { accountId, sessionId });
+        return;
+      }
+      try {
+        await updateFavorites(accountId, sessionId, movie.id, newFavoriteStatus);
+        setIsFavorite(newFavoriteStatus);
+      } catch (error) {
+        console.error("Failed to toggle favorite status:", error);
+      }
+    };
 
     return (
         <Box sx={{ padding: 5 }}>
@@ -73,11 +92,13 @@ const MovieDetailPage = ({accountId, sessionId, onFavoriteUpdate}) => {
             <Button variant="contained" color="primary" sx={{ marginRight: 2 }}>
               Watch Now
             </Button>
-            <FavoriteButton 
-          accountId={accountId}
-          sessionId={sessionId}
-          movieId={movie.id}
-          isFavorite={movie.is_favorite || false}/>
+            <FavoriteButton
+  accountId={accountId}
+  sessionId={sessionId}
+  movieId={movie.id}
+  isFavorite={isFavorite}
+  onFavoriteToggle={handleFavoriteToggle}
+/>
           </Box>
         </CardContent>
       </Card>

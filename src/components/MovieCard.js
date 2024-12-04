@@ -6,16 +6,37 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 import FavoriteButton from './FavoriteButton';
+import { updateFavorites } from '../helpers/favorites/fetchFavorites';
 
-export default function MovieCard({movie, accountId, sessionId, onFavoriteUpdate}) {
+export default function MovieCard({movie, onFavoriteToggle}) {
   const navigate = useNavigate();
+  const sessionId = localStorage.getItem('session_id');
+  const accountId = localStorage.getItem('account_id');
+  //localStorage.get("favorite")
+  const [isFavorite, setIsFavorite] = React.useState(() => {
+    const favorites = new Set(JSON.parse(localStorage.getItem("favorites")) || []);
+    return favorites.has(movie.id)
+  }
 
-  //if the button is clicked, call the parent (my favorite page) to add/remove new favorite movie to the page
-  const onFavoriteToggle = (movieId, isFavorite) => {
-    if (onFavoriteUpdate) {
-      onFavoriteUpdate(movieId, isFavorite); 
+  );
+
+  const handleFavoriteToggle = async() => {
+    const newFavoriteStatus = !isFavorite
+      if (!accountId || !sessionId) {
+    console.error("Missing accountId or sessionId", { accountId, sessionId });
+    return;
+  }
+    try {
+      await updateFavorites(accountId, sessionId, movie.id, newFavoriteStatus)
+      setIsFavorite(newFavoriteStatus)
+      if (onFavoriteToggle) {
+        onFavoriteToggle(movie.id, newFavoriteStatus);
+      }
+    } catch (error) {
+      console.error("Fail to toggle fav status:", error)
     }
-  };
+  }
+
   return (
     <Card sx={{ maxWidth: 345, height: 350, position: 'relative', backgroundColor:"#F1E5D1", color: "#987070", cursor: "pointer"}} onClick={() => navigate(`/movie/${movie.id}`)}>
       <CardMedia
@@ -62,8 +83,8 @@ export default function MovieCard({movie, accountId, sessionId, onFavoriteUpdate
           variant="icon"
           sessionId={sessionId}
           movieId={movie.id}
-          isFavorite={movie.is_favorite || false}
-          onFavoriteToggle={onFavoriteToggle} /> 
+          isFavorite = {isFavorite}
+          onFavoriteToggle={handleFavoriteToggle} /> 
           {/* deliver the prop to button */}
         </div>
       </CardActions>

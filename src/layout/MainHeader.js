@@ -95,6 +95,16 @@ export default function MovieAppBar() {
               md: '1.1rem', // Larger size for medium and larger screens
             }}}
   color="inherit"
+  onClick={() => navigate("/genre/all")}
+>
+  All Movies
+</Typography>
+          <Typography sx={{ color:"#373A40", cursor: "pointer", padding: "10px", fontSize: {
+              xs: '0.9rem', // Smaller font size for extra-small screens
+              sm: '1rem',   // Normal size for small screens
+              md: '1.1rem', // Larger size for medium and larger screens
+            }}}
+  color="inherit"
   onClick={() => navigate("/favorites")}
 >
   My Favorite

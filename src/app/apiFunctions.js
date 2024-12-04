@@ -53,11 +53,12 @@ try {
 }
 
 }
+//1 function moi de goi fetchfavmovie va updatelocalstorage
 
 //Add/remove favorite movies
 export const updateFavoriteMovie = async (accountId, sessionId, movieId, favorite) => {
 try {
-  const response = await apiService.post(
+  await apiService.post(
       `/account/${accountId}/favorite`,
       {
         media_type:"movie",

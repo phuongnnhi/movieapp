@@ -23,7 +23,8 @@ const MyFavoritePage = () => {
         };
         loadFavorite();
     }, [])
-
+    
+    //receive the "announcement" from movie card and render new isFavorite movie
     const handleFavoriteUpdate = (movieId, isFavorite) => {
         // Update the local state
         setFavorites((prevFavorites) =>
@@ -49,7 +50,7 @@ const MyFavoritePage = () => {
               <MovieCard
               key={movie.id}
               movie={{ ...movie, is_favorite: true }}
-              onFavoriteUpdate={handleFavoriteUpdate}
+              onFavoriteToggle={handleFavoriteUpdate}
             />
             </Grid>
           ))}
