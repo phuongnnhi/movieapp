@@ -1,10 +1,10 @@
 import { Button, IconButton } from "@mui/material";
-import { updateFavoriteMovie } from "../app/apiFunctions";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useContext, useState } from "react";
 import { getRequestToken, redirectToAuthPage } from "../auth/authFunction";
 import { AuthContext } from "../context/AuthContext";
+import { updateFavorites } from "../helpers/favorites/fetchFavorites";
 
 const FavoriteButton = ({ movieId, isFavorite: initialFavorite, onFavoriteToggle, variant}) => {
     const [isFavorite, setIsFavorite] = useState(initialFavorite);
@@ -13,8 +13,7 @@ const FavoriteButton = ({ movieId, isFavorite: initialFavorite, onFavoriteToggle
 
     //when ever the button is clicked, update the movie to endpoint API
     const handleFavoriteToggle = async () => {
-        if (!sessionId) {
-          // If user is not logged in, redirect them to login page
+      if (!sessionId) {
           try {
               const requestToken = await getRequestToken();
               redirectToAuthPage(requestToken);
@@ -23,19 +22,18 @@ const FavoriteButton = ({ movieId, isFavorite: initialFavorite, onFavoriteToggle
           }
           return;
       }
-        setLoading(true);
-        //the new favorite status when the button is clicked is the revert from the current status (true=>false)
-
-        try {
-            await updateFavoriteMovie(accountId, sessionId, movieId, !isFavorite);
-            setIsFavorite(!isFavorite)
-            //announce to movie card to update the state of the movie and announce to my fav page
-            if (onFavoriteToggle) onFavoriteToggle(movieId, !isFavorite);
-        } catch (error) {
-            console.error("Fail to set favorite status:", error)
-        }
-        setLoading(false);
-    }
+      setLoading(true);
+  
+      try {
+          await updateFavorites(accountId, sessionId, movieId, !isFavorite);
+          setIsFavorite(!isFavorite);
+          if (onFavoriteToggle) onFavoriteToggle(movieId, !isFavorite);
+      } catch (error) {
+          console.error("Failed to update favorite status:", error);
+      } finally {
+          setLoading(false);
+      }
+  };
     if (variant === "icon") {
         // Icon Button for cards or compact use
         return (

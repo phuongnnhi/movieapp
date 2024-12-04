@@ -13,6 +13,7 @@ const MovieDetailPage = () => {
     const [movie, setMovie] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
     const {sessionId, accountId} = useContext(AuthContext)
+    const [error, setError] = useState(null); 
 
     useEffect(() => {
       const loadMovieDetails = async () => {
@@ -25,13 +26,26 @@ const MovieDetailPage = () => {
           setIsFavorite(favorites.has(response.data.id));
         } catch (error) {
           console.error("Failed to fetch movie details:", error);
+          setError("This movie is no longer available."); 
         }
       };
       loadMovieDetails();
     }, [id]);
-    if (!movie) {
-        return <Typography>Loading...</Typography>
-    }
+
+    
+    if (error) {
+      return (
+          <Box sx={{ padding: 5, textAlign: "center" }}>
+              <Typography variant="h6" sx={{ color: "#987070" }}>
+                  {error}
+              </Typography>
+          </Box>
+      );
+  }
+
+  if (!movie) {
+    return <Typography>Loading...</Typography>
+}
 
     const handleFavoriteToggle = async () => {
       const newFavoriteStatus = !isFavorite;

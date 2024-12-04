@@ -3,6 +3,7 @@ import { fetchFavoriteMovie } from "../app/apiFunctions";
 import { Box, Grid, Typography } from "@mui/material";
 import MovieCard from "../components/MovieCard";
 import { AuthContext } from "../context/AuthContext";
+import { updateFavorites } from "../helpers/favorites/fetchFavorites";
 
 const MyFavoritePage = () => {
     const [favorites, setFavorites] = useState([]);
@@ -21,6 +22,8 @@ const MyFavoritePage = () => {
                 setLoading(true);
                 const favoriteMovies = await fetchFavoriteMovie(accountId, sessionId);
                 setFavorites(favoriteMovies);
+                const favoriteIds = favoriteMovies.map((movie) => movie.id);
+    localStorage.setItem("favorites", JSON.stringify(favoriteIds));
             } catch (error) {
                 console.error("Faile to fetch favorite movies:", error)
             }
@@ -31,13 +34,17 @@ const MyFavoritePage = () => {
     
     //receive the "announcement" from movie card and render new isFavorite movie
     const handleFavoriteUpdate = (movieId, isFavorite) => {
-        // Update the local state
-        setFavorites((prevFavorites) =>
-          isFavorite
-            ? [...prevFavorites, favorites.find((movie) => movie.id === movieId)]
-            : prevFavorites.filter((movie) => movie.id !== movieId)
-        );
-      };
+      setFavorites((prevFavorites) => {
+        if (isFavorite) {
+          // Add the movie back to the list
+          const movie = favorites.find((movie) => movie.id === movieId);
+          return [...prevFavorites, { ...movie, is_favorite: true }];
+        } else {
+          // Remove the movie from the list
+          return prevFavorites.filter((movie) => movie.id !== movieId);
+        }
+      });
+    };
 
     if (loading) return <div>Loading...</div>;
     if (!isLoggedIn) {

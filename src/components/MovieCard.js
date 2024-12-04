@@ -14,11 +14,14 @@ export default function MovieCard({movie, onFavoriteToggle}) {
   const {sessionId, accountId} = React.useContext(AuthContext)
 
   const [isFavorite, setIsFavorite] = React.useState(() => {
-    const favorites = new Set(JSON.parse(localStorage.getItem("favorites")) || []);
-    return favorites.has(movie.id)
-  }
-
-  );
+    try {
+      const favorites = new Set(JSON.parse(localStorage.getItem("favorites")) || []);
+      return favorites.has(movie.id);
+    } catch (error) {
+      console.error("Failed to initialize isFavorite:", error);
+      return false;
+    }
+  });
 
   const handleFavoriteToggle = async() => {
     const newFavoriteStatus = !isFavorite
@@ -27,6 +30,7 @@ export default function MovieCard({movie, onFavoriteToggle}) {
     return;
   }
     try {
+  
       await updateFavorites(accountId, sessionId, movie.id, newFavoriteStatus)
       setIsFavorite(newFavoriteStatus)
       if (onFavoriteToggle) {

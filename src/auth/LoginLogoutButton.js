@@ -23,8 +23,8 @@ const LoginLogoutButton = () => {
     const handleLogout = () => {
       localStorage.removeItem("session_id");
       localStorage.removeItem("account_id");
-      setSessionId(null)
-      setAccountId(null)
+      setSessionId("")
+      setAccountId("")
       localStorage.removeItem("favorites");
       setIsLoggedIn(false);
       refreshApp();
