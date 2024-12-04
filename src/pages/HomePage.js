@@ -48,7 +48,7 @@ function HomePage() {
 
         <MovieAppBar />
         {location.pathname === "/" && <FeaturedMovies />}
-        {location.pathname !== "/favorites" && location.pathname !== "/" && <FilterAndSort/>}
+        {location.pathname !== "/favorites" && location.pathname !== "/" && location.pathname !== "/movie" && <FilterAndSort/>}
  
       <Box sx={{flexGrow:"1", display: "flex",
     flexDirection: "column", justifyContent: "flex-start"}}>
