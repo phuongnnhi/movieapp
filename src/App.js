@@ -10,13 +10,26 @@ import MyFavoritePage from './pages/MyFavoritePage';
 import AuthCallback from './auth/AuthCallback';
 import { AuthProvider } from './context/AuthContext';
 import { FilterProvider } from './context/FilterContext';
-// import { FavoriteMoviesProvider } from './context/FavoriteContext';
+
+export const AppContext = React.createContext();
 
 function App() {
+  const [appKey, setAppKey] = useState(0);
+
+  const refreshApp = () => {
+    setAppKey(prevKey => prevKey + 1);
+  };
 
   return (
     <AuthProvider>
-      
+    <AppContext.Provider value={{ refreshApp }}>
+      <AppContent key={appKey} />
+    </AppContext.Provider>
+  </AuthProvider>
+  )}
+
+  function AppContent() {
+    return (   
     <Router>
     <FilterProvider>
 
@@ -36,7 +49,6 @@ function App() {
 
     </FilterProvider>
     </Router> 
-    </AuthProvider>
   );
 }
 

@@ -58,9 +58,7 @@ export default function MovieCard({movie, onFavoriteToggle}) {
           className="movie-card-actions">
       <div onClick={(event) => event.stopPropagation()}>
       <FavoriteButton 
-          accountId={accountId}
           variant="icon"
-          sessionId={sessionId}
           movieId={movie.id}
           isFavorite = {isFavorite}
           onFavoriteToggle={handleFavoriteToggle} /> 

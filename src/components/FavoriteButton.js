@@ -25,6 +25,7 @@ const FavoriteButton = ({ movieId, isFavorite: initialFavorite, onFavoriteToggle
       }
         setLoading(true);
         //the new favorite status when the button is clicked is the revert from the current status (true=>false)
+
         try {
             await updateFavoriteMovie(accountId, sessionId, movieId, !isFavorite);
             setIsFavorite(!isFavorite)

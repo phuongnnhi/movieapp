@@ -3,10 +3,12 @@ import { getRequestToken, redirectToAuthPage } from "./authFunction"
 import { Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { AppContext } from "../App";
 
 const LoginLogoutButton = () => {
     const theme = useTheme();
-    const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext)
+    const {isLoggedIn, setIsLoggedIn, setSessionId, setAccountId} = useContext(AuthContext)
+    const { refreshApp } = useContext(AppContext);
  
 
     const handleLogin = async () => {
@@ -21,8 +23,11 @@ const LoginLogoutButton = () => {
     const handleLogout = () => {
       localStorage.removeItem("session_id");
       localStorage.removeItem("account_id");
+      setSessionId(null)
+      setAccountId(null)
       localStorage.removeItem("favorites");
       setIsLoggedIn(false);
+      refreshApp();
     }
 
         return(

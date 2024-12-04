@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 const AuthCallback = () => {
   const [searchParams] = useSearchParams(); //retrieve parameters from the URL
   const navigate = useNavigate();
-  const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
+  const {setIsLoggedIn, setSessionId, setAccountId} = useContext(AuthContext);
 
   useEffect(() => {
     const handleAuth = async () => {
@@ -20,6 +20,10 @@ const AuthCallback = () => {
           const accountId = await getAccountDetails(sessionId);
 
       localStorage.setItem("account_id", accountId);
+                // Update AuthContext state variables
+          setSessionId(sessionId);
+          setAccountId(accountId);
+          setIsLoggedIn(true);
 
           console.log("Session ID:", sessionId);
           setIsLoggedIn(true);
