@@ -21,6 +21,7 @@ const LoginLogoutButton = () => {
     const handleLogout = () => {
       localStorage.removeItem("session_id");
       localStorage.removeItem("account_id");
+      localStorage.removeItem("favorites");
       setIsLoggedIn(false);
     }
 

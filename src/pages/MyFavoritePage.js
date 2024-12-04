@@ -7,11 +7,17 @@ import { AuthContext } from "../context/AuthContext";
 const MyFavoritePage = () => {
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(true);
-    const {sessionId, accountId} = useContext(AuthContext)
+    const {sessionId, accountId, isLoggedIn, setIsLoggedIn} = useContext(AuthContext)
 
     useEffect(()=> {
         const loadFavorite = async() => {
-            try {
+          if (!accountId || !sessionId) {
+            setIsLoggedIn(false);
+            setLoading(false)
+            return; 
+          } 
+          if (accountId && sessionId) setIsLoggedIn(true)
+          try {
                 setLoading(true);
                 const favoriteMovies = await fetchFavoriteMovie(accountId, sessionId);
                 setFavorites(favoriteMovies);
@@ -34,7 +40,16 @@ const MyFavoritePage = () => {
       };
 
     if (loading) return <div>Loading...</div>;
-    
+    if (!isLoggedIn) {
+      return (
+        <Box sx={{ padding: 5, textAlign: "center" }}>
+          <Typography variant="h6" sx={{ color: "#987070" }}>
+            Log in to add your favorite movies
+          </Typography>
+        </Box>
+      );
+    }
+
     return (
         <Box sx={{ padding: 5 }}>
       <Typography variant="h4" sx={{ marginBottom: 3, color: "#C39898" }}>
