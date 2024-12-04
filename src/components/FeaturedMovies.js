@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react"; // Import Swiper for carousel
 import "swiper/css"; // Import Swiper styles
@@ -8,14 +8,13 @@ import { fetchFeaturedMovies } from "../app/apiFunctions";
 import { Navigation } from 'swiper/modules';
 import FavoriteButton from "./FavoriteButton";
 import { updateFavorites } from "../helpers/favorites/fetchFavorites";
+import { AuthContext } from "../context/AuthContext";
 
 const FeaturedMovies = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [favorites, setFavorites] = useState(new Set());
-
-  const sessionId = localStorage.getItem('session_id');
-  const accountId = localStorage.getItem('account_id');
+  const {sessionId, accountId} = useContext(AuthContext)
 
   // Fetch popular movies
   useEffect(() => {

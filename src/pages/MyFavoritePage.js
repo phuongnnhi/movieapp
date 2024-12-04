@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { fetchFavoriteMovie } from "../app/apiFunctions";
 import { Box, Grid, Typography } from "@mui/material";
 import MovieCard from "../components/MovieCard";
+import { AuthContext } from "../context/AuthContext";
 
 const MyFavoritePage = () => {
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const accountId = localStorage.getItem("account_id");
-    const sessionId = localStorage.getItem("session_id");
+    const {sessionId, accountId} = useContext(AuthContext)
 
     useEffect(()=> {
         const loadFavorite = async() => {

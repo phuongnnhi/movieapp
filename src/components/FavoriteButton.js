@@ -2,18 +2,17 @@ import { Button, IconButton } from "@mui/material";
 import { updateFavoriteMovie } from "../app/apiFunctions";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { getRequestToken, redirectToAuthPage } from "../auth/authFunction";
+import { AuthContext } from "../context/AuthContext";
 
 const FavoriteButton = ({ movieId, isFavorite: initialFavorite, onFavoriteToggle, variant}) => {
     const [isFavorite, setIsFavorite] = useState(initialFavorite);
     const [loading, setLoading] = useState();
+    const {sessionId, accountId} = useContext(AuthContext)
 
     //when ever the button is clicked, update the movie to endpoint API
     const handleFavoriteToggle = async () => {
-        const sessionId = localStorage.getItem("session_id");
-        const accountId = localStorage.getItem("account_id");
-
         if (!sessionId) {
           // If user is not logged in, redirect them to login page
           try {

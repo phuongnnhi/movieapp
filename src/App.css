@@ -27,3 +27,170 @@ html, body {
 #DBB5B5
 #C39898
 #987070 */
+/* Styles for the FormControl */
+.form-control {
+  min-width: 200px;
+}
+
+/* Styles for the InputLabel */
+.input-label {
+  background-color: #000;
+  color: #F1E5D1 !important; /* Default label color */
+}
+
+.input-label.Mui-focused {
+  color: #F1E5D1; /* Focused label color */
+}
+
+/* Styles for the Select */
+.select {
+  color: #F1E5D1; /* Selected text color */
+}
+
+.select .MuiInputBase-input {
+  color: #F1E5D1; /* Text inside the dropdown */
+}
+
+.select .MuiOutlinedInput-notchedOutline {
+  border-color: #F1E5D1; /* Border color */
+}
+
+.select:hover .MuiOutlinedInput-notchedOutline {
+  border-color: lightgray; /* Hover border color */
+}
+
+.select.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #F1E5D1; /* Focused border color */
+}
+
+.select .MuiSelect-icon {
+  color: #F1E5D1 !important; /* Dropdown arrow color */
+}
+
+/* Styles for the dropdown menu */
+.menu-paper {
+  background-color: #000 !important; /* Background color of dropdown */
+  color: #F1E5D1 !important; /* Text color inside the dropdown menu */
+}
+
+.menu-paper .MuiMenuItem-root {
+  color: #F1E5D1; /* Menu item color */
+}
+
+.menu-paper .MuiMenuItem-root.Mui-selected {
+  background-color: #333 !important; /* Background for selected item */
+  color: #F1E5D1 !important; /* Text color for selected item */
+}
+
+.menu-paper .MuiMenuItem-root.Mui-selected:hover {
+  background-color: #555 !important; /* Hover background for selected item */
+}
+
+/* Styles for the TextField container */
+.fselect-textfield {
+  width: 100% !important;
+}
+
+.fselect-textfield .MuiInputBase-root {
+  color: #F1E5D1 !important; /* Text color */
+}
+
+.fselect-textfield .MuiOutlinedInput-notchedOutline {
+  border-color: #F1E5D1 !important; /* Border color */
+}
+
+.fselect-textfield:hover .MuiOutlinedInput-notchedOutline {
+  border-color: lightgray !important; /* Hover border color */
+}
+
+.fselect-textfield.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #F1E5D1 !important; /* Focused border color */
+}
+
+.fselect-textfield .MuiInputLabel-root {
+  color: #F1E5D1 !important; /* Label color */
+}
+
+.fselect-textfield .MuiInputLabel-root.Mui-focused {
+  color: #F1E5D1 !important; /* Focused label color */
+}
+
+.fselect-textfield .MuiSelect-icon {
+  color: #F1E5D1 !important; /* Dropdown arrow color */
+}
+
+/* Styles for the dropdown menu */
+.fselect-menu-paper {
+  max-height: 300px;
+  background-color: #000 !important; /* Background color of dropdown */
+  color: #F1E5D1 !important; /* Text color inside the dropdown menu */
+}
+
+.fselect-menu-paper .MuiMenuItem-root {
+  color: #F1E5D1 !important; /* Menu item text color */
+}
+
+.fselect-menu-paper .MuiMenuItem-root.Mui-selected {
+  background-color: #333 !important; /* Background for selected item */
+  color: #F1E5D1 !important; /* Text color for selected item */
+}
+
+.fselect-menu-paper .MuiMenuItem-root.Mui-selected:hover {
+  background-color: #555 !important; /* Hover background for selected item */
+}
+
+/* MovieCard-specific styles */
+.movie-card {
+  max-width: 345px;
+  height: 350px;
+  position: relative;
+  background-color: #F1E5D1 !important;
+  color: #987070 !important;
+  cursor: pointer;
+}
+
+.movie-card-actions {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+/* Global font size variables */
+
+@media (max-width: 600px) { /* xs */
+  .font-responsive {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) { /* sm */
+  .font-responsive {
+    font-size: 1rem !important;
+  }
+}
+
+/* Center the pagination container */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Pagination styles */
+.custom-pagination .MuiPaginationItem-root {
+  color: #ffffff; /* Change pagination numbers to white */
+}
+
+.custom-pagination .Mui-selected {
+  background-color: #ffffff; /* Background color for selected */
+  color: #000000; /* Text color for selected */
+}
+
+.custom-pagination .MuiPaginationItem-ellipsis {
+  color: #ffffff; /* Color for ellipsis */
+}

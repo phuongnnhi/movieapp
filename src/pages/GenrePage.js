@@ -7,6 +7,7 @@ import { useParams,  useNavigate, Link } from "react-router-dom";
 import FunctionPagination from "../components/Pagination";
 import BreadcumbsMenu from "../components/BreadcrumbsMenu";
 import { FilterContext } from "../context/FilterContext";
+import MovieGridLayout from "../components/MovieGridLayout";
 
 const GenrePage = () => {
   const { genre } = useParams();
@@ -57,13 +58,7 @@ const GenrePage = () => {
   return (
     <Box sx={{ padding: 5 }}>
     <BreadcumbsMenu path="/" currentLabel={genre} resetFilters={resetFilters}/>
-      <Grid container spacing={1}>
-        {filteredMovies.map((movie) => (
-          <Grid key={movie.id} item xs={6} sm={4} lg={3} xl={2}>
-            <MovieCard movie={movie} />
-          </Grid>
-        ))}
-      </Grid>
+    <MovieGridLayout movieType = {filteredMovies}/>
       <FunctionPagination
         totalPages={totalPages}
         currentPage={page}

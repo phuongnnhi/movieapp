@@ -7,12 +7,12 @@ import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 import FavoriteButton from './FavoriteButton';
 import { updateFavorites } from '../helpers/favorites/fetchFavorites';
+import { AuthContext } from '../context/AuthContext';
 
 export default function MovieCard({movie, onFavoriteToggle}) {
   const navigate = useNavigate();
-  const sessionId = localStorage.getItem('session_id');
-  const accountId = localStorage.getItem('account_id');
-  //localStorage.get("favorite")
+  const {sessionId, accountId} = React.useContext(AuthContext)
+
   const [isFavorite, setIsFavorite] = React.useState(() => {
     const favorites = new Set(JSON.parse(localStorage.getItem("favorites")) || []);
     return favorites.has(movie.id)
@@ -38,45 +38,24 @@ export default function MovieCard({movie, onFavoriteToggle}) {
   }
 
   return (
-    <Card sx={{ maxWidth: 345, height: 350, position: 'relative', backgroundColor:"#F1E5D1", color: "#987070", cursor: "pointer"}} onClick={() => navigate(`/movie/${movie.id}`)}>
+    <Card className='movie-card' onClick={() => navigate(`/movie/${movie.id}`)}>
       <CardMedia
         sx={{ height: 140 }}
         image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
       />
       <CardContent sx={{paddingBottom:0 }} >
-        <Typography gutterBottom variant="h6" component="div" sx={{paddingBottom:0, marginBottom:0,  fontSize: {
-              xs: '0.9rem', 
-              sm: '1rem',   
-              md: '1.1rem', 
-            },}}>
+        <Typography gutterBottom variant="h6" component="div" sx={{paddingBottom:0, marginBottom:0}} className="font-responsive">
           <b>{movie.title? movie.title : movie.name}</b></Typography>
-          <Typography variant="body2" color="textSecondary" sx={{ marginBottom: "4px", fontSize: {
-              xs: '0.8rem', 
-              sm: '1rem',   
-              md: '1.1rem', 
-            },}}>
+          <Typography variant="body2" color="textSecondary" sx={{ marginBottom: "4px"}} className="font-responsive">
     <b>Release date</b>: {movie.release_date? movie.release_date : movie.first_air_date}
   </Typography>
-  <Typography variant="body2" color="textSecondary" sx={{fontSize: {
-              xs: '0.8rem', 
-              sm: '1rem',   
-              md: '1.1rem',
-            },}}>
+  <Typography variant="body2" color="textSecondary" className="font-responsive">
     <b>Average rating</b>: {movie.vote_average}
   </Typography>
       </CardContent>
       <CardActions
-          sx={{
-            position: "absolute",
-            bottom: 0,
-            right: 0,
-            display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            paddingRight: "10px",
-            paddingBottom: "10px",
-        }}>
+          className="movie-card-actions">
       <div onClick={(event) => event.stopPropagation()}>
       <FavoriteButton 
           accountId={accountId}

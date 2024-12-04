@@ -18,8 +18,8 @@ const FilterAndSort = () => {
         />
       </Grid>
       <Grid item xs={12} sm={6}>
-        <SortDropdown value={sortBy} onChange={handleSortChange} />
-      </Grid>
+        <SortDropdown value={sortBy} onChange={handleSortChange}/>
+      </Grid> 
     </Grid>
   );
 };

@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { fetchMovieDetails } from "../app/apiFunctions";
 import { Box, Button, Card, CardContent, CardMedia, Chip, Typography} from "@mui/material";
 import BreadcumbsMenu from "../components/BreadcrumbsMenu";
 import FavoriteButton from "../components/FavoriteButton";
 import { updateFavorites } from "../helpers/favorites/fetchFavorites";
+import { AuthContext } from "../context/AuthContext";
 
 
 const MovieDetailPage = () => {
     const {id} = useParams();
     const [movie, setMovie] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
-    const sessionId = localStorage.getItem('session_id');
-const accountId = localStorage.getItem('account_id');
+    const {sessionId, accountId} = useContext(AuthContext)
 
     useEffect(() => {
       const loadMovieDetails = async () => {

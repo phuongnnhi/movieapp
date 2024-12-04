@@ -4,6 +4,7 @@ import { fetchDiscoverMovies } from "../app/apiFunctions";
 import FunctionPagination from "./Pagination";
 import { Box, Grid, Typography } from "@mui/material";
 import MovieCard from "./MovieCard";
+import MovieGridLayout from "./MovieGridLayout";
 
 const SearchResultsPage = () => {
     const { query } = useParams(); // Extract the search query from the URL
@@ -40,17 +41,11 @@ return (
         <Typography>Loading...</Typography>
       ) : (
         <>
-          <Grid container spacing={3}>
-            {movies.length > 0 ? (
-              movies.map((movie) => (
-                <Grid key={movie.id} item xs={6} sm={4} lg={3} xl={2}>
-                  <MovieCard movie={movie} />
-                </Grid>
-              ))
-            ) : (
-              <Typography>No results found.</Typography>
-            )}
-          </Grid>
+        <MovieGridLayout
+        movieType={movies}
+        loading={loading}
+        fallbackMessage="No results found for your search."
+      />
           {/* Include FunctionPagination */}
           {totalPages > 1 && (
             <FunctionPagination

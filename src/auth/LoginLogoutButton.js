@@ -9,13 +9,6 @@ const LoginLogoutButton = () => {
     const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext)
  
 
-    useEffect(() => {
-      // Check if a session ID exists in localStorage
-      const sessionId = localStorage.getItem("session_id");
-      setIsLoggedIn(!!sessionId); // Set login state
-      console.log(isLoggedIn)
-    }, [setIsLoggedIn]);
-
     const handleLogin = async () => {
         try {
             const requestToken = await getRequestToken(); //get request token
@@ -27,6 +20,7 @@ const LoginLogoutButton = () => {
 
     const handleLogout = () => {
       localStorage.removeItem("session_id");
+      localStorage.removeItem("account_id");
       setIsLoggedIn(false);
     }
 
